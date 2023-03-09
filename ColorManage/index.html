@@ -1,0 +1,46 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="utils/dexie.min.js"></script>
+    <script src="utils/DB.js"></script>
+    <script src="utils/vue.min.js"></script>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+    <div class="container" id="app" :style="{'grid-template-rows': `repeat(${floor(list.length)}, 240px)`}">
+        <div class="color-card" v-for="(item, index) in list" :key="index">
+            <div class="color" :style="{backgroundColor: item.code}"></div>
+            <div class="info">
+                <div class="code top">
+                    {{item.code}}
+                    <button type="button" @click="copy(item)">
+                        copy
+                    </button>
+                    <button type="button" @click="del(item, index)">
+                        del
+                    </button>
+                </div>
+                <div class="time top">date: {{item.time}}</div>
+                <div class="count top">count: {{item.count}}</div>
+            </div>
+        </div>
+        <div class="uploadColor" v-if="show">
+            <input type="text" @keyup.enter="upload" placeholder="请输入颜色代码" v-model="color" autocomplete="off">
+        </div>
+        <div class="add" @click="show = !show" :class="{rotate: show}"></div>
+        <div class="message">
+
+        </div>
+    </div>
+</body>
+<script src="js/index.js"></script>
+
+</html>
